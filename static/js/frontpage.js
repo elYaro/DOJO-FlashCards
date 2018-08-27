@@ -1,0 +1,5 @@
+let mainDOM = {
+    createElements : function(){
+        
+    }
+}
