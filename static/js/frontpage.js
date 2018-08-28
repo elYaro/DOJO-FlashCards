@@ -6,7 +6,7 @@ let mainDOM = {
         document.body.appendChild(mainContainer);
         
         this.createLogo();
-        this.createMenu()
+        this.createMenu();
       
     },
 
@@ -63,15 +63,35 @@ let mainDOM = {
         document.getElementById('rightField').appendChild(rightButton);
     },
 
-    cleanMenuContainer : function(){
-        let menuContainer = document.getElementById('menuContainer');
-        while (menuContainer.firstChild){
-            menuContainer.removeChild(menuContainer.firstChild);
-        }
-    },
 
     addNewQuestion : function(){
-        this.cleanMenuContainer();
+        mainEvent.removeButtonsFromFrontPage();
+    },
+}
 
-        },
+
+let mainEvent = {
+    removeButtonsFromFrontPage : function(){
+        let mainContainer = document.getElementById('mainContainer');
+        mainContainer.removeChild(mainContainer.lastChild);
+        mainEvent.createTextBoxes();
+    },
+        
+    createTextBoxes : function(){
+        let newQuestion = document.createElement('form');
+        newQuestion.setAttribute('action', '');
+        newQuestion.setAttribute('method', 'POST');
+        newQuestion.setAttribute('class', 'newQuestion');
+        newQuestion.setAttribute('id', 'newQuestion');
+        mainContainer.appendChild(newQuestion);
+
+        let questionTextBox = document.createElement('textarea');
+        questionTextBox.setAttribute('name', 'question');
+        questionTextBox.setAttribute('id', 'question');
+        questionTextBox.setAttribute('cols', '30');
+        questionTextBox.setAttribute('rows', '2');
+        questionTextBox.setAttribute('placeholder', 'enter your question here')
+        questionTextBox.required = 'True';
+        document.getElementById('newQuestion').appendChild(questionTextBox);
+    }, 
 }
