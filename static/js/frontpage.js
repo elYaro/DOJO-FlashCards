@@ -110,5 +110,16 @@ let mainEvent = {
         answerTextBox.setAttribute('placeholder', 'enter your answer here')
         answerTextBox.required = 'True';
         document.getElementById('newQuestion').appendChild(answerTextBox);
+
+        let submitButtonDiv = document.createElement('div');
+        submitButtonDiv.setAttribute('class', 'submitDiv')
+        submitButtonDiv.setAttribute('id', 'submitDiv')
+        let submitButton = document.createElement('button');
+        submitButton.setAttribute('type', 'submit');
+        submitButton.setAttribute('onclick', '');
+        submitButton.innerHTML = 'SUBMIT';
+        document.getElementById('newQuestion').appendChild(submitButtonDiv);
+        document.getElementById('submitDiv').appendChild(submitButton);
     }, 
+
 }
