@@ -85,6 +85,10 @@ let mainEvent = {
         newQuestion.setAttribute('id', 'newQuestion');
         mainContainer.appendChild(newQuestion);
 
+        let labelForQuestion = document.createElement('p');
+        labelForQuestion.innerHTML = 'New question:'
+        document.getElementById('newQuestion').appendChild(labelForQuestion);
+
         let questionTextBox = document.createElement('textarea');
         questionTextBox.setAttribute('name', 'question');
         questionTextBox.setAttribute('id', 'question');
@@ -93,5 +97,18 @@ let mainEvent = {
         questionTextBox.setAttribute('placeholder', 'enter your question here')
         questionTextBox.required = 'True';
         document.getElementById('newQuestion').appendChild(questionTextBox);
+    
+        let labelForAnswer = document.createElement('p');
+        labelForAnswer.innerHTML = 'New answer:'
+        document.getElementById('newQuestion').appendChild(labelForAnswer);
+
+        let answerTextBox = document.createElement('textarea');
+        answerTextBox.setAttribute('name', 'answer');
+        answerTextBox.setAttribute('id', 'answer');
+        answerTextBox.setAttribute('cols', '30');
+        answerTextBox.setAttribute('rows', '2');
+        answerTextBox.setAttribute('placeholder', 'enter your answer here')
+        answerTextBox.required = 'True';
+        document.getElementById('newQuestion').appendChild(answerTextBox);
     }, 
 }
