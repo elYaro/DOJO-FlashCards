@@ -1,13 +1,17 @@
 let mainDOM = {
-    createElements : function(){
+    createElementsHomePage : function(){
+        this.createMainContainer()
+        this.createLogo();
+        this.createMenuContainer();
+        this.createFields();
+        this.createButtons();
+    },
+    
+    createMainContainer : function(){
         let mainContainer = document.createElement('div');
         mainContainer.setAttribute('class', 'mainContainer');
         mainContainer.setAttribute('id', 'mainContainer');
         document.body.appendChild(mainContainer);
-        
-        this.createLogo();
-        this.createMenu();
-      
     },
 
     createLogo : function(){
@@ -17,11 +21,6 @@ let mainDOM = {
         logo.setAttribute('id', 'logo');
         logo.setAttribute('class', 'image');
         document.getElementById('mainContainer').appendChild(logo);
-    },
-
-    createMenu : function(){
-        this.createMenuContainer();
-        this.createFields();
     },
 
     createMenuContainer: function(){
@@ -40,9 +39,7 @@ let mainDOM = {
         let rightField = document.createElement('div');
         rightField.setAttribute('class','field');
         rightField.setAttribute('id','rightField');
-        document.getElementById('menuContainer').appendChild(rightField);
-
-        this.createButtons();
+        document.getElementById('menuContainer').appendChild(rightField); 
     },
     
     createButtons : function(){
@@ -59,31 +56,35 @@ let mainDOM = {
         rightButton.setAttribute('class','button');
         rightButton.setAttribute('id','rightButton');
         rightButton.innerHTML = 'ADD new card';
-        rightButton.addEventListener('click', this.addNewQuestion);
+        rightButton.addEventListener('click', mainEvents.addNewCard);
         document.getElementById('rightField').appendChild(rightButton);
-    },
-
-
-    addNewQuestion : function(){
-        mainEvent.removeButtonsFromFrontPage();
     },
 }
 
 
-let mainEvent = {
-    removeButtonsFromFrontPage : function(){
+
+let mainDOMRemoval = {
+    removeButtonsFromHomePage : function(){
         let mainContainer = document.getElementById('mainContainer');
         mainContainer.removeChild(mainContainer.lastChild);
-        mainEvent.createTextBoxes();
     },
-        
+}
+
+
+
+let mainEvents = {
+    addNewCard : function(){
+        mainDOMRemoval.removeButtonsFromHomePage();
+        mainEvents.createTextBoxes()
+    },
+
     createTextBoxes : function(){
-        let newQuestion = document.createElement('form');
-        newQuestion.setAttribute('action', '');
-        newQuestion.setAttribute('method', 'POST');
-        newQuestion.setAttribute('class', 'newQuestion');
-        newQuestion.setAttribute('id', 'newQuestion');
-        mainContainer.appendChild(newQuestion);
+        let newQuestionForm = document.createElement('form');
+        newQuestionForm.setAttribute('action', '/new_question');
+        newQuestionForm.setAttribute('method', 'POST');
+        newQuestionForm.setAttribute('class', 'newQuestion');
+        newQuestionForm.setAttribute('id', 'newQuestion');
+        mainContainer.appendChild(newQuestionForm);
 
         let labelForQuestion = document.createElement('p');
         labelForQuestion.innerHTML = 'New question:'
@@ -110,16 +111,28 @@ let mainEvent = {
         answerTextBox.setAttribute('placeholder', 'enter your answer here')
         answerTextBox.required = 'True';
         document.getElementById('newQuestion').appendChild(answerTextBox);
-
+// tutaj stop
         let submitButtonDiv = document.createElement('div');
         submitButtonDiv.setAttribute('class', 'submitDiv')
         submitButtonDiv.setAttribute('id', 'submitDiv')
         let submitButton = document.createElement('button');
         submitButton.setAttribute('type', 'submit');
-        submitButton.setAttribute('onclick', '');
+        submitButton.addEventListener('click', this.afterclick);
         submitButton.innerHTML = 'SUBMIT';
         document.getElementById('newQuestion').appendChild(submitButtonDiv);
         document.getElementById('submitDiv').appendChild(submitButton);
     }, 
 
+
+
+
+
+    // convertInputToJSON : function(){
+    //     let questionData = document.getElementById('question').value;
+    //     let answerData = document.getElementById('answer').value;
+    //     let dataToDB = { question : questionData, answer : answerData};
+    //     localStorage.setItem('newRecord', JSON.stringify(dataToDB));
+    //     console.log(questionData, answerData, dataToDB);
+
+    // }
 }

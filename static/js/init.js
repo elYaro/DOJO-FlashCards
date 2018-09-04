@@ -1,1 +1,1 @@
-mainDOM.createElements()
+mainDOM.createElementsHomePage()
